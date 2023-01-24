@@ -1,0 +1,36 @@
+{% extends 'flatpages/default.html' %}
+{% load filter %}
+
+
+{% block title %}
+Все посты
+{% endblock title %}
+
+
+{% block content %}
+{% for post in posts%}
+
+<p>{% if posts %}</p>
+    <table>
+        <tbody>
+            <tr>
+                <td>Дата</td>
+                <td>Название</td>
+                <td>Описание</td>
+                <td>Автор</td>
+                <td>Рейтинг</td>
+            </tr>
+            <tr>
+                <td>{{ post.dateCreation.date|date:"d M, Y" }}</td>
+                <td>{{ post.title|censor }}</td>
+                <td>{{ post.text|censor|truncatewords:2 }}</td>
+                <td>{{ post.author.authorUser.username}}</td>
+                <td>{{ post.rating }}</td>
+            </tr>
+        </tbody>
+    </table>
+<p>{% else %}</p>
+<h2>Постов нет!</h2>
+<p>{% endif %}</p>
+{% endfor %}
+{% endblock content %}
